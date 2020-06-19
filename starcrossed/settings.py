@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-	'main_app',
+    'main_app',
 ]
 
 MIDDLEWARE = [
@@ -78,8 +78,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'starcrossed',
-		'USER': 'postgres',
-		'PASSWORD': 'Lunatari7',
+        'USER': 'postgres',
+        'PASSWORD': 'Lunatari7',
     }
 }
 
