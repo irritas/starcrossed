@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.views.generic import ListView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -22,8 +23,10 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
+@login_required
 def user_index(request):
-	pass
+    users = User.objects.all()
+    return render(request, 'user/index.html', { 'users': users })
 
 def signs_detail(request, sign):
 	fortune = requests.get(f'http://horoscope-api.herokuapp.com/horoscope/today/{sign}').json()
