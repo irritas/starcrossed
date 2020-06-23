@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+# from .models import User
+# from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
