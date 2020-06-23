@@ -82,8 +82,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'starcrossed',
-        # 'USER': os.environ['USER'],
-        # 'PASSWORD': os.environ['PASSWORD'],
+        'USER': os.environ['USER'],
+        'PASSWORD': os.environ['PASSWORD'],
     }
 }
 

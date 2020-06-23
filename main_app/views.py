@@ -6,6 +6,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+import requests
 
 def home(request):
     return render(request, 'home.html')
@@ -30,5 +31,8 @@ def user_index(request):
     users = User.objects.all()
     return render(request, 'user/index.html', { 'users': users })
 
-def sign_detail(request):
-	pass
+def signs_detail(request, sign):
+	fortune = requests.get(f'http://horoscope-api.herokuapp.com/horoscope/today/{sign}').json()
+	return render(request, 'signs/detail.html',	{
+		'sign': sign
+	})
