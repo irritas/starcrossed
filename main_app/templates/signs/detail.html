@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
 
-<h1>{{ sign }}</h1>
+<h1>{{ sign.name }}</h1>
+<h3>{{ symbol }}</h3>
+<img src="{% static img_url %}" alt="{{ sign }}">
+<p>{{ fortune.horoscope }}</p>
 
 {% endblock %}
