@@ -2,11 +2,10 @@
 {% block content %}
 
 {% for user in users %}
-  <a href="{% url 'details' user.id %}">
     <div class="card">
         <div class="card-content">
-            <span class="card-title">{{ user.name }}</span>
-            <p>Sign: {{ user.sign }}</p>
+            <span class="card-title">Name: {{ user.name }}</span>
+            <p>Age: {{ user.age }}</p>
             <p>Bio: {{ user.bio }}</p>
         </div>
     </div>
