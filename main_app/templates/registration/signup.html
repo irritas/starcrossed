@@ -5,7 +5,7 @@
 {% if error_message %}
 	<p class="red-text">{{ error_message }}</p>
 {% endif %}
-
+<div id="signup">
 <form method="post" action="{% url 'signup' %}">
 	{% csrf_token %}
 	{% for field in form %}
@@ -22,5 +22,5 @@
     {% endfor %}
     <button type="submit">Sign up</button>
 </form>
-
+</div>
 {% endblock %}

@@ -7,7 +7,7 @@
 {% for sign, symbol in signs.items %}
     <a href="{% url 'signs_detail' sign %}">
         <div class="card">
-            <div class="card-content">
+            <div id="card-content">
                 {% with 'images/'|add:sign|add:'.png' as img_url %}
                     <img class="sign-images" src="{% static img_url %}" alt="{{ sign }}">
                 {% endwith %}
