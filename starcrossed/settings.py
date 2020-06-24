@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main_app',
-    # 'users.apps.UsersConfig'
 ]
 
 MIDDLEWARE = [
@@ -130,3 +129,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+
+import django_heroku
+django_heroku.settings(locals())
