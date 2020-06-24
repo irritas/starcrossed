@@ -4,6 +4,7 @@ from django.views.generic import ListView
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from .forms import SignUpForm
 from datetime import date
 import requests
@@ -69,16 +70,6 @@ def signup(request):
 	context = {'form': form, 'error_message': error_message}
 	return render(request, 'registration/signup.html', context)
 
-# @login_required
-# def user_index(request):
-#     users = User.objects.all()
-#     return render(request, 'user/index.html', { 'users': users })
-
-#Sarah's codes
-# def user_detail(request, user_id):
-#   user = User.objects.get(id=user_id)
-#   return render(request, 'main_app/user_detail.html', {'user': user})
-
 SIGNS_LOOKUP = {
 	'Aries': 'Ram',
 	'Taurus': 'Bull',
@@ -109,3 +100,13 @@ def signs_detail(request, sign_name):
 		'fortune': fortune,
 		'img_url': f'images/{sign_name}.png'
 	})
+
+@login_required
+def users_index(request):
+    users = User.objects.all()
+    return render(request, 'users/index.html', { 'users': users })
+
+@login_required
+def users_detail(request, user_id):
+    user = User.objects.get(username=user_id)
+    return render(request, 'users/detail.html', { 'user': user })
