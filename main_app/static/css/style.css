@@ -37,6 +37,10 @@ header li a {
   text-align: center;
   color: white;
   text-decoration: none;
+  grid-template-columns: 100px 50px 100px;
+  grid-template-rows: 80px auto 80px; 
+  column-gap: 10px;
+  row-gap: 15px;
 }
 
 #card-links:link {
@@ -45,20 +49,10 @@ header li a {
 
 .sign-images {
   width: 200px;
-  margin-left: 10px;
-  margin-right: 10px;
-  grid-template-columns: 100px 50px 100px;
-  grid-template-rows: 80px auto 80px; 
-  column-gap: 10px;
-  row-gap: 15px;
   margin-top: 80px;
 }
 
 body {
-  grid-template-columns: 100px 50px 100px;
-  grid-template-rows: 80px auto 80px; 
-  column-gap: 10px;
-  row-gap: 15px;
   margin-top: 80px;
   background-color: gray;
   background-image: url(https://i.imgur.com/MJTKtg1.jpg);
@@ -77,7 +71,11 @@ body {
   margin-top: 100px;
 }
 
-#nice-pics {
+#nicepics {
   width: 300px;
   height: auto;
+}
+
+#signup {
+  text-align: start;
 }
