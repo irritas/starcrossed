@@ -1,0 +1,83 @@
+header {
+  background-color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 0 25px 0 black;
+}
+
+header * {
+  display: inline;
+}
+
+header li {
+  margin: 20px;
+}
+
+header li a {
+  color: white;
+  text-decoration: none;
+}
+
+/* #user-auth {
+  float: right;
+} */
+/* 
+.nice-pic {
+  max-width: 100%;
+  height: auto;
+} */
+
+.card {
+  width: 200px;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+}
+
+#card-links:link {
+  text-decoration: none;
+}
+
+.sign-images {
+  width: 200px;
+  margin-left: 10px;
+  margin-right: 10px;
+  grid-template-columns: 100px 50px 100px;
+  grid-template-rows: 80px auto 80px; 
+  column-gap: 10px;
+  row-gap: 15px;
+  margin-top: 80px;
+}
+
+body {
+  grid-template-columns: 100px 50px 100px;
+  grid-template-rows: 80px auto 80px; 
+  column-gap: 10px;
+  row-gap: 15px;
+  margin-top: 80px;
+  background-color: gray;
+  background-image: url(https://i.imgur.com/MJTKtg1.jpg);
+  background-repeat: repeat;
+  background-size: 1000px;
+  font-family: 'Open Sans Condensed', sans-serif;
+  color: white;
+  text-align: center;
+}
+
+#name {
+  font-size: larger;
+}
+
+#title {
+  margin-top: 100px;
+}
+
+#nice-pics {
+  width: 300px;
+  height: auto;
+}
