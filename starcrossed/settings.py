@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main_app',
-    # 'users.apps.UsersConfig'
 ]
 
 MIDDLEWARE = [
@@ -106,9 +105,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-#just added idk if it'll work
-# AUTH_USER_MODEL = 'users.CustomUser'
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -130,3 +126,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+
+import django_heroku
+django_heroku.settings(locals())

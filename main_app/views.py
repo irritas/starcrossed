@@ -1,29 +1,73 @@
 from django.shortcuts import render, redirect
-# from .models import User
 # from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView
-from django.contrib.auth import login
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-import requests, json
+from .forms import SignUpForm
+from datetime import date
+import requests
 
 def home(request):
     return redirect('signs_index')
 
 def signup(request):
-    error_message = ''
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('home')
-        else:
-            error_message = 'Invalid sign up - try again'
-    form = UserCreationForm()
-    context = {'form': form, 'error_message': error_message}
-    return render(request, 'registration/signup.html', context)
+	error_message = ''
+	if request.method == 'POST':
+		form = SignUpForm(request.POST)
+		if form.is_valid():
+			user = form.save()
+			user.refresh_from_db()
+			user.profile.name = form.cleaned_data.get('name')
+			user.profile.birth_date = form.cleaned_data.get('birth_date')
+			month = user.profile.birth_date.month
+			day = user.profile.birth_date.day
+			if month == 1:
+				if day > 20: user.profile.sign = 'Aquarius'
+				else: user.profile.sign = 'Capricorn'
+			if month == 2:
+				if day > 19: user.profile.sign = 'Pisces'
+				else: user.profile.sign = 'Aquarius'
+			if month == 3:
+				if day > 20: user.profile.sign = 'Aries'
+				else: user.profile.sign = 'Pisces'
+			if month == 4:
+				if day > 20: user.profile.sign = 'Taurus'
+				else: user.profile.sign = 'Aries'
+			if month == 5:
+				if day > 20: user.profile.sign = 'Gemini'
+				else: user.profile.sign = 'Taurus'
+			if month == 6:
+				if day > 21: user.profile.sign = 'Cancer'
+				else: user.profile.sign = 'Gemini'
+			if month == 7:
+				if day > 22: user.profile.sign = 'Leo'
+				else: user.profile.sign = 'Cancer'
+			if month == 8:
+				if day > 23: user.profile.sign = 'Virgo'
+				else: user.profile.sign = 'Leo'
+			if month == 9:
+				if day > 21: user.profile.sign = 'Libra'
+				else: user.profile.sign = 'Virgo'
+			if month == 10:
+				if day > 22: user.profile.sign = 'Scorpio'
+				else: user.profile.sign = 'Libra'
+			if month == 11:
+				if day > 21: user.profile.sign = 'Sagittarius'
+				else: user.profile.sign = 'Scorpio'
+			if month == 12:
+				if day > 21: user.profile.sign = 'Capricorn'
+				else: user.profile.sign = 'Sagittarius'
+			user.save()
+			raw_password = form.cleaned_data.get('password1')
+			user = authenticate(username=user.username, password=raw_password)
+			login(request, user)
+			return redirect('home')
+		else:
+			error_message = form.errors
+	form = SignUpForm()
+	context = {'form': form, 'error_message': error_message}
+	return render(request, 'registration/signup.html', context)
 
 # @login_required
 # def user_index(request):

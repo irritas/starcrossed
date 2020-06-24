@@ -15,7 +15,7 @@
         <nav>
             <div class="nav-wrapper">
                 <ul>
-                    <li><a id="name" href="/" class="left brand-logo">&nbsp;&nbsp;StarCrossed</a></li>
+                    <li><a href="/" class="left brand-logo">StarCrossed</a></li>
                 </ul>
                 <ul class="right">
                 	{% if user.is_authenticated %}
@@ -25,7 +25,6 @@
                     	<li><a id="user-auth" href="{% url 'login' %}">Log In</a></li>
                   	{% endif %}
                 </ul>
-
             </div>
         </nav>
     </header>

@@ -1,32 +1,17 @@
-# from django.contrib.auth.models import AbstractUser
-# from django.db import models
-
-# class CustomUser(AbstractUser):
-#       name = models.CharField(max_length=100)
-#   birthdate = models.DateField()
-#   bio = models.TextField(max_length=250)
-
-#     def __str__(self):
-#         return self.username
-
 from django.db import models
 from django.contrib.auth.models import User
-import requests
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+	user = models.OneToOneField(User, on_delete=models.CASCADE)
+	name = models.TextField(max_length=30, blank=True)
+	birth_date = models.DateField(null=True, blank=True)
+	sign = models.TextField(max_length=20, blank=True)
+	bio = models.TextField(max_length=500, blank=True)
 
-# class User(models.Model):
-#   user = models.OneToOneField(User, on_delete=models.CASCADE)
-#   name = models.CharField(max_length=100)
-#   birthdate = models.DateField()
-#   bio = models.TextField(max_length=250)
-
-
-#Sarah's code
-# class Profile(models.Model):
-#     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-#     causes = models.ManyToManyField(Cause)
-#     purchased_items = models.ManyToManyField(Order)
-#     def __str__(self):
-#         return self.user
+@receiver(post_save, sender=User)
+def update_user_profile(sender, instance, created, **kwargs):
+	if created:
+		Profile.objects.create(user=instance)
+	instance.profile.save()
