@@ -12,9 +12,8 @@
         <nav>
             <div class="nav-wrapper">
                 <ul>
-                    <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Star Crossed</a></li>
+                    <li><a href="/" class="left brand-logo">StarCrossed</a></li>
                 </ul>
-
                 <ul class="right">
                 	{% if user.is_authenticated %}
                     	<li><a href="{% url 'logout' %}">Log Out</a></li>
@@ -23,7 +22,6 @@
                     	<li><a href="{% url 'login' %}">Log In</a></li>
                   	{% endif %}
                 </ul>
-
             </div>
         </nav>
     </header>
