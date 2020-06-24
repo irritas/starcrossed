@@ -105,9 +105,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-#just added idk if it'll work
-# AUTH_USER_MODEL = 'users.CustomUser'
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
