@@ -2,9 +2,15 @@
 {% block content %}
 {% load static %}
 
-<h1>{{ sign.name }}</h1>
-<h3>{{ symbol }}</h3>
-<img src="{% static img_url %}" alt="{{ sign }}">
-<p>{{ fortune.horoscope }}</p>
+<div>
+	<h1>{{ sign.name }}</h1>
+	<h3>{{ symbol }}</h3>
+	<img src="{% static img_url %}" alt="{{ sign }}">
+</div>
+
+<div>
+	<div>Element: {{ fortune.element }}</div>
+	<div>Today's Fortune: {{ fortune.horoscope }}</div>
+</div>
 
 {% endblock %}
