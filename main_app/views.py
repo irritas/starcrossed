@@ -74,6 +74,11 @@ def signup(request):
 #     users = User.objects.all()
 #     return render(request, 'user/index.html', { 'users': users })
 
+#Sarah's codes
+# def user_detail(request, user_id):
+#   user = User.objects.get(id=user_id)
+#   return render(request, 'main_app/user_detail.html', {'user': user})
+
 SIGNS_LOOKUP = {
 	'Aries': 'Ram',
 	'Taurus': 'Bull',
