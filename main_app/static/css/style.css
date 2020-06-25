@@ -37,10 +37,7 @@ header li a {
   text-align: center;
   color: white;
   text-decoration: none;
-  grid-template-columns: 100px 50px 100px;
-  grid-template-rows: 80px auto 80px; 
-  column-gap: 10px;
-  row-gap: 15px;
+  display: inline-block;
 }
 
 #card-links:link {
@@ -79,3 +76,15 @@ body {
 #signup {
   text-align: start;
 }
+
+#card-container {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.cardlinks {
+  text-decoration: none;
+  color: white;
+}
+

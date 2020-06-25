@@ -1,21 +1,19 @@
-{% extends 'base.html' %}
-{% block content %}
-{% load static %}
+{% extends 'base.html' %} {% block content %} {% load static %}
 
 <h1 id="title">StarCrossed</h1>
 
-{% for sign, symbol in signs.items %}
-    <a href="{% url 'signs_detail' sign %}">
-        <div class="card">
-            <div id="card-content">
-                {% with 'images/'|add:sign|add:'.png' as img_url %}
-                    <img class="sign-images" src="{% static img_url %}" alt="{{ sign }}">
-                {% endwith %}
-                <span id="card-links">{{ sign }}</span>
-                <p id="card-links">{{ symbol }}</p>
-            </div>
+<div id="card-container">
+    {% for sign, symbol in signs.items %}
+    <div class="card">
+      <a class="cardlinks" href="{% url 'signs_detail' sign %}">
+        <div id="card-content">
+          {% with 'images/'|add:sign|add:'.png' as img_url %}
+          <img class="sign-images" src="{% static img_url %}" alt="{{ sign }}" />
+          {% endwith %}
+          <span id="card-links">{{ sign }}</span>
+          <p id="card-links">{{ symbol }}</p>
         </div>
-	</a>
-{% endfor %}
-
-{% endblock %}
+      </a>
+    </div>
+    {% endfor %} {% endblock %} print(signs.items)
+</div>
