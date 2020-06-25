@@ -81,8 +81,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'starcrossed',
-        'USER': os.environ['USER'],
-        'PASSWORD': os.environ['PASSWORD'],
+        # 'USER': os.environ['USER'],
+        # 'PASSWORD': os.environ['PASSWORD'],
     }
 }
 
@@ -126,6 +126,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'starcrossed/media')
 
 
 import django_heroku
