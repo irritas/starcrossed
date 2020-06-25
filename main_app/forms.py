@@ -22,3 +22,4 @@ class SignUpForm(UserCreationForm):
 class ChatForm(UserCreationForm):
 	class Meta:
 		model = Chat
+		fields = ()
