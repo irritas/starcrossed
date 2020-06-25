@@ -8,6 +8,13 @@ from django.contrib.auth.models import User
 from .forms import SignUpForm
 from datetime import date
 import requests
+import uuid
+import boto3
+from .models import Photo
+
+S3_BASE_URL = 'https://s3.us-west-1.amazonaws.com/'
+BUCKET = 'starcrossed'
+
 
 def home(request):
     return redirect('signs_index')
@@ -110,3 +117,18 @@ def users_index(request):
 def users_detail(request, user_id):
     user = User.objects.get(username=user_id)
     return render(request, 'users/detail.html', { 'user': user })
+
+@login_required
+def add_photo(request, user_id):
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        try:
+            s3.upload_fileobj(photo_file, BUCKET, key)
+            url = f"{S3_BASE_URL}{BUCKET}/{key}"
+            photo = Photo(url=url, user_id=user_id)
+            photo.save()
+        except:
+            print('An error occurred uploading file to S3')
+    return redirect('detail', user_id=user_id)

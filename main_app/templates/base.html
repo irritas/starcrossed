@@ -18,7 +18,8 @@
                     <li><a href="/" class="left brand-logo">StarCrossed</a></li>
                 </ul>
                 <ul class="right">
-                	{% if user.is_authenticated %}
+                    {% if user.is_authenticated %}
+                        <li><a id="user-auth" href="{% url 'users_index' %}">All Users</a></li>
                     	<li><a id="user-auth" href="{% url 'logout' %}">Log Out</a></li>
                   	{% else %}
                     	<li><a id="user-auth" href="{% url 'signup' %}">Sign Up</a></li>
