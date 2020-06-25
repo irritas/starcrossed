@@ -15,3 +15,8 @@ def update_user_profile(sender, instance, created, **kwargs):
 	if created:
 		Profile.objects.create(user=instance)
 	instance.profile.save()
+
+class Chat(models.Model):
+	users = models.ManyToManyField(User)
+	start_date = models.DateField()
+	recent_date = models.DateField()
