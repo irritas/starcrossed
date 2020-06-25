@@ -115,8 +115,12 @@ def users_index(request):
 
 @login_required
 def users_detail(request, user_id):
-    user = User.objects.get(username=user_id)
-    return render(request, 'users/detail.html', { 'user': user })
+	viewer = request.user
+	user = User.objects.get(username=user_id)
+	return render(request, 'users/detail.html', {
+		'user': user,
+		'viewer': viewer
+	})
 
 @login_required
 def add_photo(request, user_id):

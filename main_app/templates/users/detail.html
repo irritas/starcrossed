@@ -4,6 +4,19 @@
 
 <div>
 	<h1>{{ user.profile.name }}</h1>
+	<h1>{{ user.profile.sign }}</h1>
+</div>
+
+<div>
+	{{ user.profile.bio }}
+</div>
+
+<div>
+	{{ if user == viewer }}
+		This is you
+	{{ else }}
+		This is not you
+	{{ endif }}
 </div>
 
 {% for photo in user.photo_set.all %}
