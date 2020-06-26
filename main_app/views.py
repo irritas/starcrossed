@@ -5,7 +5,8 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from .forms import SignUpForm
+from .models import Chat
+from .forms import SignUpForm, BioForm
 from datetime import date
 import requests
 import uuid
@@ -115,12 +116,20 @@ def users_index(request):
 
 @login_required
 def users_detail(request, user_id):
-	viewer = request.user
+	# user = User.objects.get(username=user_id)
 	user = User.objects.get(id=user_id)
+	chats = user.chat_set.all()
+	view_chat = Chat.objects.filter(users=user).filter(users=request.user).first()
 	return render(request, 'users/detail.html', {
 		'user': user,
-		'viewer': viewer
+		'chats': chats,
+		'view_chat': view_chat
 	})
+
+@login_required
+def users_bio(request, user_id):
+	user = User.objects.get(username=user_id)
+	return redirect('user_detail', user_id=user_id)
 
 @login_required
 def add_photo(request, user_id):
@@ -136,3 +145,19 @@ def add_photo(request, user_id):
         except:
             print('An error occurred uploading file to S3')
     return redirect('users_detail', user_id=user_id)
+
+@login_required
+def add_chat(request, user_a_id, user_b_id):
+	new_chat = Chat.objects.create(start_date=date.today(), recent_date=date.today())
+	new_chat.users.add(User.objects.get(username=user_a_id))
+	new_chat.users.add(User.objects.get(username=user_b_id))
+	return redirect('chats_detail', chat_id=new_chat.id)
+
+@login_required
+def chats_detail(request, chat_id):
+	chat = Chat.objects.get(id=chat_id)
+	return render(request, 'chats/detail.html', { 'chat': chat })
+
+class ChatDelete(LoginRequiredMixin, DeleteView):
+	model = Chat
+	success_url = '/'

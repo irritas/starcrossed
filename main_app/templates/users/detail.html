@@ -7,11 +7,6 @@
 	<h1>{{ user.profile.sign }}</h1>
 </div>
 
-<div>
-	{{ user.profile.bio }}
-</div>
-
-
 {% for photo in user.photo_set.all %}
   <img id="profile-image" class="responsive-img card-panel" src="{{photo.url}}">
 {% empty %}
@@ -25,5 +20,39 @@
     <input type="submit" class="btn" value="Upload Photo">
 </form>
 
+{% comment %} <div>
+	{{ user.profile.bio }}
+	{% if user == request.user %}
+		<form action="{% url 'add_chat' user.id request.user.id %}" method="post">
+			{% csrf_token %}
+			<input type="submit" class="btn" value="Edit Bio">
+		</form>
+	{% endif %}
+</div> {% endcomment %}
+
+<div>
+	{% if user == request.user %}
+		{% for chat in chats %}
+			<div>
+				<a href="{% url 'chats_detail' chat.id %}">
+					Continue chat with
+				</a>
+			</div>
+		{% endfor %}
+	{% else %}
+		{% if view_chat %}
+			<div>
+				<a href="{% url 'chats_detail' view_chat.id %}">
+					Continue chat with {{ user.profile.name }}
+				</a>
+			</div>
+		{% else %}
+			<form action="{% url 'add_chat' user.username request.user.username %}" method="post">
+				{% csrf_token %}
+				<input type="submit" class="btn" value="Start Chat">
+			</form>
+		{% endif %}
+	{% endif %}
+</div>
 
 {% endblock %}

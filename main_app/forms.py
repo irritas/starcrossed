@@ -1,7 +1,8 @@
 from django import forms
+from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Chat
+from .models import Chat, Profile
 from datetime import date
 
 def check_age(value):
@@ -19,7 +20,7 @@ class SignUpForm(UserCreationForm):
 		model = User
 		fields = ('username', 'name', 'birth_date', 'password1', 'password2', )
 
-class ChatForm(UserCreationForm):
+class BioForm(ModelForm):
 	class Meta:
-		model = Chat
-		fields = ()
+		model = Profile
+		fields = ('bio', )
