@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.views.generic.edit import DeleteView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
@@ -116,7 +116,8 @@ def users_index(request):
 
 @login_required
 def users_detail(request, user_id):
-	user = User.objects.get(username=user_id)
+	# user = User.objects.get(username=user_id)
+	user = User.objects.get(id=user_id)
 	chats = user.chat_set.all()
 	view_chat = Chat.objects.filter(users=user).filter(users=request.user).first()
 	return render(request, 'users/detail.html', {
@@ -143,7 +144,7 @@ def add_photo(request, user_id):
             photo.save()
         except:
             print('An error occurred uploading file to S3')
-    return redirect('detail', user_id=user_id)
+    return redirect('users_detail', user_id=user_id)
 
 @login_required
 def add_chat(request, user_a_id, user_b_id):
