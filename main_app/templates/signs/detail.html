@@ -9,7 +9,20 @@
 </div>
 
 <div>
-	<div>Element: {{ fortune.element }}</div>
+	<div>Element: {{ sign.element }}</div>
+	<div>Traits:
+		{% for trait in sign.mental_traits %}
+			{{ trait }}
+		{% endfor %}
+	</div>
+	<div>Compatibility:
+		<ul>{% for partner in sign.compatibility %}
+			{% if partner == 'aurus' %}
+				<li>Taurus</li>
+			{% else %}
+				<li>{{ partner }}</li>
+			{% endif %}
+		{% endfor %}</ul>
 	<div>Today's Fortune: {{ fortune.horoscope }}</div>
 </div>
 

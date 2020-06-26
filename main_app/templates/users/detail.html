@@ -4,7 +4,7 @@
 
 <div>
 	<h1>{{ user.profile.name }}</h1>
-	<h1>{{ user.profile.sign }}</h1>
+	<h1><a href="{% url 'signs_detail' user.profile.sign %}">{{ user.profile.sign }}</a></h1>
 </div>
 
 {% for photo in user.photo_set.all %}
@@ -20,15 +20,12 @@
     <input type="submit" class="btn" value="Upload Photo">
 </form>
 
-{% comment %} <div>
-	{{ user.profile.bio }}
+<div>
+	<div>{{ user.profile.bio }}</div>
 	{% if user == request.user %}
-		<form action="{% url 'add_chat' user.id request.user.id %}" method="post">
-			{% csrf_token %}
-			<input type="submit" class="btn" value="Edit Bio">
-		</form>
+		<a href="{% url 'bio_update' user.id %}">Edit Bio</a>
 	{% endif %}
-</div> {% endcomment %}
+</div>
 
 <div>
 	{% if user == request.user %}
@@ -36,6 +33,11 @@
 			<div>
 				<a href="{% url 'chats_detail' chat.id %}">
 					Continue chat with
+					{% for u in chat.users.all %}
+						{% if u != request.user %}
+							{{ u.profile.name }}
+						{% endif %}
+					{% endfor %}
 				</a>
 			</div>
 		{% endfor %}
