@@ -23,15 +23,6 @@ header li a {
   text-decoration: none;
 }
 
-/* #user-auth {
-  float: right;
-} */
-/* 
-.nice-pic {
-  max-width: 100%;
-  height: auto;
-} */
-
 .card {
   width: 200px;
   text-align: center;
@@ -89,9 +80,9 @@ body {
 }
 
 .card-content {
-  float: left;
   display: flex;
   flex-direction: column;
+  border-width: thin;
 }
 
 #userboxes {
