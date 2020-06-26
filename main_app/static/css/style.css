@@ -88,3 +88,20 @@ body {
   color: white;
 }
 
+.card-content {
+  float: left;
+  display: flex;
+  flex-direction: column;
+}
+
+#userboxes {
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+  border-style: solid;
+}
+
+#profile-image {
+  border-radius: 50%;
+  width: 200px;
+}
