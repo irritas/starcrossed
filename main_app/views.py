@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import DeleteView
 from django.views.generic import ListView
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from .models import Chat
+from .models import Chat, Profile
 from .forms import SignUpForm, BioForm
 from datetime import date
 import requests
@@ -116,7 +116,6 @@ def users_index(request):
 
 @login_required
 def users_detail(request, user_id):
-	# user = User.objects.get(username=user_id)
 	user = User.objects.get(id=user_id)
 	chats = user.chat_set.all()
 	view_chat = Chat.objects.filter(users=user).filter(users=request.user).first()
@@ -125,11 +124,6 @@ def users_detail(request, user_id):
 		'chats': chats,
 		'view_chat': view_chat
 	})
-
-@login_required
-def users_bio(request, user_id):
-	user = User.objects.get(username=user_id)
-	return redirect('user_detail', user_id=user_id)
 
 @login_required
 def add_photo(request, user_id):
@@ -161,3 +155,14 @@ def chats_detail(request, chat_id):
 class ChatDelete(LoginRequiredMixin, DeleteView):
 	model = Chat
 	success_url = '/'
+
+@login_required
+def bio_update(request, user_id):
+	user = User.objects.get(id=user_id)
+	form = BioForm(instance=user.profile)
+	if request.method == 'POST':
+		form = BioForm(request.POST, instance=user.profile)
+		if form.is_valid():
+			form.save()
+			return redirect('users_detail', user_id=user_id)
+	return render(request, 'users/bio_form.html', {'form': form})
