@@ -2,11 +2,11 @@
 {% block content %}
 {% load static %}
 
-
+<h1>Users</h1>
 
 {% for user in users %}
 <div id="userboxes" class="card">
-  <a class="cardlinks" href="{% url 'users_detail' user.get_username %}">
+  <a class="cardlinks" href="{% url 'users_detail' user.id %}">
     <div class="card-content">
       <span class="card-title">Name: {{ user.profile.name }}</span>
       <p>Sign: {{ user.profile.sign }}</p>
